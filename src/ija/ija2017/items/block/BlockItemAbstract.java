@@ -56,4 +56,9 @@ public abstract class BlockItemAbstract implements BlockItemInterface {
     public void setOutputPort(PortItem outputPort) {
         this.outputPort = outputPort;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

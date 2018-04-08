@@ -87,7 +87,7 @@ public class Test01 {
         sumBlock1.execute();
 
 //        Assert.assertEquals("Test execute().", 300, sumBlock1.getOutputPort().getValue());
-        Assert.assertThat(300.0, equalTo(sumBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(300.0, sumBlock1.getOutputPort().getValue(), 0);
     }
 
     /**
@@ -101,7 +101,7 @@ public class Test01 {
         subBlock1.addInputPort(port03);
         subBlock1.execute();
 
-        Assert.assertThat(-50.0, equalTo(subBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(-50.0, subBlock1.getOutputPort().getValue(), 0);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Test01 {
         mulBlock1.addInputPort(port03);
         mulBlock1.execute();
 
-        Assert.assertThat(42.0, equalTo(mulBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(42.0, mulBlock1.getOutputPort().getValue(), 0);
     }
 
     /**
@@ -129,7 +129,7 @@ public class Test01 {
         divBlock1.addInputPort(port03);
         divBlock1.execute();
 
-        Assert.assertThat(2.0, equalTo(divBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(2.0, divBlock1.getOutputPort().getValue(), 0);
     }
 
 
@@ -138,7 +138,7 @@ public class Test01 {
      */
     @Test
     public void test08() {
-        Assert.assertThat(0.0, equalTo(divBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(0.0, divBlock1.getOutputPort().getValue(), 0);
     }
 
     /**
@@ -146,7 +146,7 @@ public class Test01 {
      */
     @Test
     public void test09() {
-        Assert.assertThat(null, equalTo(divBlock1.getInputPorts()));
+        Assert.assertEquals(divBlock1.getInputPorts(), null);
     }
 
     /**
@@ -169,18 +169,18 @@ public class Test01 {
         sumBlock1.addInputPort(port01);
         sumBlock1.addInputPort(port02);
         sumBlock1.execute();
-        Assert.assertThat(30.0, equalTo(sumBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(30.0, sumBlock1.getOutputPort().getValue(), 0);
 
         subBlock1.addInputPort(port01);
         subBlock1.addInputPort(port02);
         subBlock1.addInputPort(port03);
         subBlock1.execute();
-        Assert.assertThat(-40.0, equalTo(subBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(-40.0, subBlock1.getOutputPort().getValue(), 0);
 
         mulBlock1.addInputPort(sumBlock1.getOutputPort());
         mulBlock1.addInputPort(subBlock1.getOutputPort());
         mulBlock1.execute();
-        Assert.assertThat(-1200.0, equalTo(mulBlock1.getOutputPort().getValue()));
+        Assert.assertEquals(-1200.0, mulBlock1.getOutputPort().getValue(), 0);
 
     }
 
