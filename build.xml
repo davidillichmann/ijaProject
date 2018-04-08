@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project name="ijaProject" default="compile" basedir=".">
+        <!-- Sets variables which can later be used. -->
+        <!-- The value of a property is accessed via ${} -->
+        <property name="src.dir" location="src" />
+
+        <property name="build.dir" location="build" />
+        <property name="lib.dir" location="lib" />
+        <property name="doc.dir" location="doc" />
+	
+	    <!-- Define the classpath which includes the junit.jar and the classes after compiling-->
+	    <path id="junit.class.path">
+	    	<pathelement location="lib/junit-4.12.jar" />
+	    	<pathelement location="lib/hamcrest-core-1.3.jar" />
+	        <pathelement location="${build.dir}" />
+	    </path>
+        
+        <target name="clean">
+        	<delete dir="${build.dir}"/>
+        </target>
+        
+        
+        <target name="compile" depends="clean">
+        
+        <mkdir dir="${build.dir}"/>
+        	
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}" classpath="${lib.dir}/junit-4.12.jar"/>
+        
+        </target>
+        
+        <!-- Run the JUnit Tests -->
+        <!-- Output is XML, could also be plain-->
+        <target name="run" depends="compile">
+        		<junit printsummary="on" fork="true" haltonfailure="yes">
+                        <classpath refid="junit.class.path" />
+        			<!--  <formatter type="xml" /> -->
+                        <batchtest todir="${test.report.dir}">
+                                <fileset dir="${src.dir}">
+                                        <include name="**/*Test*.java" />
+                                </fileset>
+                        </batchtest>
+                </junit>
+        </target>
+
+        <target name="main" depends="compile, run">
+                
+        </target>
+
+</project>
