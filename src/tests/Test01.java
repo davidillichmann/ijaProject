@@ -10,6 +10,7 @@ import java.lang.reflect.Modifier;
 
 import ija.ija2017.interfaces.BlockItemInterface;
 import ija.ija2017.interfaces.PortItemInterface;
+import ija.ija2017.items.block.SubBlockItem;
 import ija.ija2017.items.block.SumBlockItem;
 import ija.ija2017.items.connection.PortItem;
 import org.junit.Before;
@@ -29,6 +30,7 @@ public class Test01 {
     private PortItem port02;
     private PortItem port03;
     private SumBlockItem sumBlock1;
+    private SubBlockItem subBlock1;
 
     @Before
     public void setUp() {
@@ -37,6 +39,7 @@ public class Test01 {
         port03 = new PortItem(PortItemInterface.type.input);
 
         sumBlock1 = new SumBlockItem();
+        subBlock1 = new SubBlockItem();
 
     }
 
@@ -67,7 +70,7 @@ public class Test01 {
     }
 
     /**
-     * SumBlockItem: Zakladni test typu
+     * SumBlockItem: Test execute()
      */
     @Test
     public void test04() {
@@ -81,6 +84,19 @@ public class Test01 {
         Assert.assertThat(300.0, equalTo(sumBlock1.getOutputPort().getValue()));
     }
 
+    /**
+     * SumBlockItem: test execute()
+     */
+    @Test
+    public void test05() {
+        port01.setValue(50);
+        port03.setValue(100);
+        subBlock1.addInputPort(port01);
+        subBlock1.addInputPort(port03);
+        subBlock1.execute();
+
+        Assert.assertThat(-150.0, equalTo(subBlock1.getOutputPort().getValue()));
+    }
 
 
 

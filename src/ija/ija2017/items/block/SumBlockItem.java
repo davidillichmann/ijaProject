@@ -28,13 +28,12 @@ public class SumBlockItem extends BlockItemAbstract {
 //            System.out.printf("The Sum is %f\n" , result);
 
             if (result > Double.MAX_VALUE) {
-                System.out.printf("SUM pretekl\n", result);
+                System.out.printf("SUM pretekl\n");
                 //            TODO    event
             } else if (result < -Double.MAX_VALUE) {
-                System.out.printf("SUM podtekl\n", result);
+                System.out.printf("SUM podtekl\n");
             }
         }
-
 
         setOutputPortValue(result);
 
