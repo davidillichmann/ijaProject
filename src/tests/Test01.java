@@ -6,8 +6,6 @@
 package tests;
 
 
-import java.lang.reflect.Modifier;
-
 import ija.ija2017.interfaces.BlockItemInterface;
 import ija.ija2017.interfaces.PortItemInterface;
 import ija.ija2017.items.block.DivBlockItem;
@@ -18,9 +16,6 @@ import ija.ija2017.items.connection.PortItem;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-
 
 /**
  *
@@ -183,9 +178,5 @@ public class Test01 {
         Assert.assertEquals(-1200.0, mulBlock1.getOutputPort().getValue(), 0);
 
     }
-
-
-
-
 
 }

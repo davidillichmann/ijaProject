@@ -5,7 +5,6 @@ import ija.ija2017.interfaces.BoardItemInterface;
 import ija.ija2017.interfaces.ExecuteControllerInterface;
 import ija.ija2017.interfaces.PipeItemInterface;
 import ija.ija2017.interfaces.PortItemInterface;
-import ija.ija2017.items.block.DivBlockItem;
 import ija.ija2017.items.block.MulBlockItem;
 import ija.ija2017.items.block.SubBlockItem;
 import ija.ija2017.items.block.SumBlockItem;
@@ -16,17 +15,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Created by xillic00 on 08.04.18.
+ *
  */
 public class Test02 {
 
     private PipeItemInterface pipe01;
     private PipeItemInterface pipe02;
     private BoardItemInterface board;
-    private ExecuteControllerInterface controller;
+//    private ExecuteControllerInterface controller;
 
     private PortItem port01;
     private PortItem port02;
@@ -34,7 +33,6 @@ public class Test02 {
     private SumBlockItem sumBlock1;
     private SubBlockItem subBlock1;
     private MulBlockItem mulBlock1;
-    private DivBlockItem divBlock1;
 
     @Before
     public void setUp() throws Exception {
@@ -48,7 +46,6 @@ public class Test02 {
         sumBlock1 = new SumBlockItem();
         subBlock1 = new SubBlockItem();
         mulBlock1 = new MulBlockItem();
-        divBlock1 = new DivBlockItem();
     }
 
     @Test
@@ -91,9 +88,9 @@ public class Test02 {
         board.addBlockItem(sumBlock1);
         board.addBlockItem(subBlock1);
         board.addBlockItem(mulBlock1);
-        controller = new ExecuteController(board);
+        ExecuteControllerInterface controller = new ExecuteController(board);
 
-        Assert.assertThat("Vysledek je spatne",-1200.0, equalTo(controller.solveWholeBoard()));
+        Assert.assertEquals("Vysledek je spatne", -1200.0, controller.solveWholeBoard(), 0);
     }
 
     @Test
