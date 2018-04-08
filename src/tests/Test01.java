@@ -101,7 +101,7 @@ public class Test01 {
         subBlock1.addInputPort(port03);
         subBlock1.execute();
 
-        Assert.assertThat(-150.0, equalTo(subBlock1.getOutputPort().getValue()));
+        Assert.assertThat(-50.0, equalTo(subBlock1.getOutputPort().getValue()));
     }
 
     /**
@@ -133,6 +133,56 @@ public class Test01 {
     }
 
 
+    /**
+     * DivBlockItem: Testuji to, ze bez execute je value 0
+     */
+    @Test
+    public void test08() {
+        Assert.assertThat(0.0, equalTo(divBlock1.getOutputPort().getValue()));
+    }
+
+    /**
+     * DivBlockItem: Testuji to, ze prirazeni inputPorts neexistuje
+     */
+    @Test
+    public void test09() {
+        Assert.assertThat(null, equalTo(divBlock1.getInputPorts()));
+    }
+
+    /**
+     * DivBlockItem, SumBlockItem: Test rozdilnosti typu
+     */
+    @Test
+    public void test10() {
+        Assert.assertNotEquals(sumBlock1.getType(), divBlock1.getType());
+    }
+
+    /**
+     * Test jednoducheho programu. Scitacka 3 vstupu - 1 zadany, 2 z dalsich bloku
+     */
+    @Test
+    public void test11() {
+        port01.setValue(10);
+        port02.setValue(20);
+        port03.setValue(30);
+
+        sumBlock1.addInputPort(port01);
+        sumBlock1.addInputPort(port02);
+        sumBlock1.execute();
+        Assert.assertThat(30.0, equalTo(sumBlock1.getOutputPort().getValue()));
+
+        subBlock1.addInputPort(port01);
+        subBlock1.addInputPort(port02);
+        subBlock1.addInputPort(port03);
+        subBlock1.execute();
+        Assert.assertThat(-40.0, equalTo(subBlock1.getOutputPort().getValue()));
+
+        mulBlock1.addInputPort(sumBlock1.getOutputPort());
+        mulBlock1.addInputPort(subBlock1.getOutputPort());
+        mulBlock1.execute();
+        Assert.assertThat(-1200.0, equalTo(mulBlock1.getOutputPort().getValue()));
+
+    }
 
 
 

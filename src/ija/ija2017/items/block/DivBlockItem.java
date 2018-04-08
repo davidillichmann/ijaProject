@@ -20,20 +20,25 @@ public class DivBlockItem extends BlockItemAbstract {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         double result = 0.0;
+
+//        TODO: if getInputPorts().size() != numberOfPorts ---> false
 
         for (int i = 0; i < getInputPorts().size(); i++){
 
             if (getInputPorts().get(i).getValue() == 0){
                 System.out.printf("DIV deleni 0\n");
+                return false;
 //                TODO: exit
             }
 
-            if (i == 0)
+            if (i == 0) {
                 result = getInputPorts().get(i).getValue();
-            else
+            }
+            else {
                 result /= getInputPorts().get(i).getValue();
+            }
 
             System.out.printf("The DIV is %f\n" , result);
 
@@ -46,7 +51,9 @@ public class DivBlockItem extends BlockItemAbstract {
             }
         }
 
+
         setOutputPortValue(result);
+        return true;
 
 //        System.out.printf("%f", getOutputPort().getValue());
     }

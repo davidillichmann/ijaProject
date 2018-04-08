@@ -20,7 +20,7 @@ public class SumBlockItem extends BlockItemAbstract {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         double result = 0.0;
 
         for (int i = 0; i < getInputPorts().size(); i++){
@@ -36,6 +36,7 @@ public class SumBlockItem extends BlockItemAbstract {
         }
 
         setOutputPortValue(result);
+        return true;
 
 //        System.out.printf("%f", getOutputPort().getValue());
     }

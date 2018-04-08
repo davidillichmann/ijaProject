@@ -9,7 +9,7 @@ public interface BlockItemInterface {
         SUM, SUB, MUL, DIV, CMP
     }
 
-    void execute();
+    boolean execute();
 
     PortItem getOutputPort();
 

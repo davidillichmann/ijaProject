@@ -20,11 +20,14 @@ public class SubBlockItem extends BlockItemAbstract {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         double result = 0.0;
 
         for (int i = 0; i < getInputPorts().size(); i++){
-            result -= getInputPorts().get(i).getValue();
+            if(i == 0)
+                result = getInputPorts().get(i).getValue();
+            else
+                result -= getInputPorts().get(i).getValue();
 //            System.out.printf("The SUB is %f\n" , result);
 
             if (result > Double.MAX_VALUE) {
@@ -36,6 +39,7 @@ public class SubBlockItem extends BlockItemAbstract {
         }
 
         setOutputPortValue(result);
+        return true;
 
 //        System.out.printf("%f", getOutputPort().getValue());
     }
