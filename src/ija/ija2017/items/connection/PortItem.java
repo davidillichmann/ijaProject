@@ -6,7 +6,7 @@ package ija.ija2017.items.connection;
 import ija.ija2017.interfaces.PortItemInterface;
 
 /**
- * @author davidillichmann
+ * @author xfryct00
  *
  */
 public class PortItem implements PortItemInterface {
@@ -19,11 +19,9 @@ public class PortItem implements PortItemInterface {
     private type type;
     private double value;
 
-
-
     public PortItem(type type) {
         this.type = type;
-        this.portItemId = currentPortItemId++; // generate TODO
+        this.portItemId = currentPortItemId++;
     }
 
     public String getName() {

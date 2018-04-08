@@ -17,25 +17,35 @@ import org.junit.Assert;
 
 /**
  *
- * @author koci
+ * @author xfryct00
  */
 public class Test01 {
 
     private PortItem port01;
+    private PortItem port02;
 
     @Before
     public void setUp() {
         port01 = new PortItem(PortItemInterface.type.input);
+        port02 = new PortItem(PortItemInterface.type.output);
     }
 
     /**
-     * Zakladni test implementace.
+     * Zakladni test typu portu
      */
     @Test
     public void test01() {
 
         Assert.assertEquals("Test typu.", PortItemInterface.type.input, port01.getType());
         Assert.assertNotEquals("Test typu.", PortItemInterface.type.output, port01.getType());
+    }
+
+    /**
+     * Zakladni test autoinkrementace ID
+     */
+    @Test
+    public void test02() {
+        Assert.assertNotEquals("Test ID.", port01.getPortItemId(), port02.getPortItemId());
     }
 
 }
