@@ -10,6 +10,8 @@ import java.lang.reflect.Modifier;
 
 import ija.ija2017.interfaces.BlockItemInterface;
 import ija.ija2017.interfaces.PortItemInterface;
+import ija.ija2017.items.block.DivBlockItem;
+import ija.ija2017.items.block.MulBlockItem;
 import ija.ija2017.items.block.SubBlockItem;
 import ija.ija2017.items.block.SumBlockItem;
 import ija.ija2017.items.connection.PortItem;
@@ -31,6 +33,8 @@ public class Test01 {
     private PortItem port03;
     private SumBlockItem sumBlock1;
     private SubBlockItem subBlock1;
+    private MulBlockItem mulBlock1;
+    private DivBlockItem divBlock1;
 
     @Before
     public void setUp() {
@@ -40,6 +44,8 @@ public class Test01 {
 
         sumBlock1 = new SumBlockItem();
         subBlock1 = new SubBlockItem();
+        mulBlock1 = new MulBlockItem();
+        divBlock1 = new DivBlockItem();
 
     }
 
@@ -85,7 +91,7 @@ public class Test01 {
     }
 
     /**
-     * SumBlockItem: test execute()
+     * SubBlockItem: test execute()
      */
     @Test
     public void test05() {
@@ -96,6 +102,34 @@ public class Test01 {
         subBlock1.execute();
 
         Assert.assertThat(-150.0, equalTo(subBlock1.getOutputPort().getValue()));
+    }
+
+    /**
+     * MulBlockItem: test execute()
+     */
+    @Test
+    public void test06() {
+        port01.setValue(21);
+        port03.setValue(2);
+        mulBlock1.addInputPort(port01);
+        mulBlock1.addInputPort(port03);
+        mulBlock1.execute();
+
+        Assert.assertThat(42.0, equalTo(mulBlock1.getOutputPort().getValue()));
+    }
+
+    /**
+     * DivBlockItem: test execute()
+     */
+    @Test
+    public void test07() {
+        port01.setValue(10);
+        port03.setValue(5);
+        divBlock1.addInputPort(port01);
+        divBlock1.addInputPort(port03);
+        divBlock1.execute();
+
+        Assert.assertThat(2.0, equalTo(divBlock1.getOutputPort().getValue()));
     }
 
 

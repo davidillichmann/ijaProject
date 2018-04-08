@@ -9,7 +9,7 @@ import ija.ija2017.items.connection.PortItem;
 import java.util.ArrayList;
 
 /**
- * @author davidillichmann
+ * @author xfryct00
  *
  */
 public abstract class BlockItemAbstract implements BlockItemInterface {

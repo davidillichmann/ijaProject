@@ -8,7 +8,7 @@ import ija.ija2017.interfaces.PortItemInterface;
 import ija.ija2017.items.connection.PortItem;
 
 /**
- * @author davidillichmann
+ * @author xfryct00
  *
  */
 public class SubBlockItem extends BlockItemAbstract {

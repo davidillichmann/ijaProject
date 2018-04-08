@@ -4,7 +4,7 @@
 package ija.ija2017.items.block;
 
 /**
- * @author davidillichmann
+ * @author xfryct00
  *
  */
 public class CmpBlockItem extends BlockItemAbstract {
