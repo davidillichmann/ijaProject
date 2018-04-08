@@ -9,4 +9,8 @@ package ija.ija2017.items.block;
  */
 public class SubBlockItem extends BlockItemAbstract {
 
+    @Override
+    public void execute() {
+
+    }
 }

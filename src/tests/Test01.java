@@ -8,11 +8,15 @@ package tests;
 
 import java.lang.reflect.Modifier;
 
+import ija.ija2017.interfaces.BlockItemInterface;
 import ija.ija2017.interfaces.PortItemInterface;
+import ija.ija2017.items.block.SumBlockItem;
 import ija.ija2017.items.connection.PortItem;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 
 
 /**
@@ -23,15 +27,21 @@ public class Test01 {
 
     private PortItem port01;
     private PortItem port02;
+    private PortItem port03;
+    private SumBlockItem sumBlock1;
 
     @Before
     public void setUp() {
         port01 = new PortItem(PortItemInterface.type.input);
         port02 = new PortItem(PortItemInterface.type.output);
+        port03 = new PortItem(PortItemInterface.type.input);
+
+        sumBlock1 = new SumBlockItem();
+
     }
 
     /**
-     * Zakladni test typu portu
+     * PORT: Zakladni test typu portu
      */
     @Test
     public void test01() {
@@ -41,11 +51,41 @@ public class Test01 {
     }
 
     /**
-     * Zakladni test autoinkrementace ID
+     * PORT: Zakladni test autoinkrementace ID
      */
     @Test
     public void test02() {
         Assert.assertNotEquals("Test ID.", port01.getPortItemId(), port02.getPortItemId());
     }
+
+    /**
+     * SumBlockItem: Zakladni test typu
+     */
+    @Test
+    public void test03() {
+        Assert.assertNotEquals("Test typu.", BlockItemInterface.type.DIV, sumBlock1.getType());
+    }
+
+    /**
+     * SumBlockItem: Zakladni test typu
+     */
+    @Test
+    public void test04() {
+        port01.setValue(100);
+        port03.setValue(200);
+        sumBlock1.addInputPort(port01);
+        sumBlock1.addInputPort(port03);
+        sumBlock1.execute();
+
+//        Assert.assertEquals("Test execute().", 300, sumBlock1.getOutputPort().getValue());
+        Assert.assertThat(300.0, equalTo(sumBlock1.getOutputPort().getValue()));
+    }
+
+
+
+
+
+
+
 
 }

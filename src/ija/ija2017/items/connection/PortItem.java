@@ -12,7 +12,6 @@ import ija.ija2017.interfaces.PortItemInterface;
 public class PortItem implements PortItemInterface {
 
     static private int currentPortItemId = 1;
-
     private int portItemId;
     private int pipeItemId;
     private String name;

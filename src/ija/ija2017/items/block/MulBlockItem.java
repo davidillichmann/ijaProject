@@ -8,5 +8,8 @@ package ija.ija2017.items.block;
  *
  */
 public class MulBlockItem extends BlockItemAbstract {
+    @Override
+    public void execute() {
 
+    }
 }

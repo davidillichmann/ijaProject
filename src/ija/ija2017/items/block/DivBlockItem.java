@@ -8,5 +8,8 @@ package ija.ija2017.items.block;
  *
  */
 public class DivBlockItem extends BlockItemAbstract {
+    @Override
+    public void execute() {
 
+    }
 }
