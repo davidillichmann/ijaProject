@@ -2,12 +2,12 @@ package ija.ija2017.interfaces;
 
 public interface PortItemInterface {
 
-    public getPortItemId()
-    public getType()
-    public getName()
-    public getPipeItemId()
-    public getValue()
+    int getPortItemId();
+    int getType();
+    String getName();
+    int getPipeItemId();
+    double getValue();
 
-    public setValue()
+    void setValue(double value);
 
 }

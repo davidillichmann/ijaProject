@@ -21,6 +21,34 @@ public class PortItem implements PortItemInterface {
 
     public PortItem(int type) {
         this.type = type;
-        this.portItemId = this.currentPortItemId++; // generate TODO
+        this.portItemId = currentPortItemId++; // generate TODO
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public double getValue() {
+        return this.value;
+    }
+
+    public static int getCurrentPortItemId() {
+        return currentPortItemId;
+    }
+
+    public int getPipeItemId() {
+        return this.pipeItemId;
+    }
+
+    public int getPortItemId() {
+        return this.portItemId;
+    }
+
+    public int getType() {
+        return this.type;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 }

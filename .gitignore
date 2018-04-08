@@ -3,6 +3,7 @@
 
 /.out
 .out/*
+.out
 
 # User-specific stuff:
 /.idea
