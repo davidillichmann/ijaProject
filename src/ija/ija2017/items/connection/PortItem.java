@@ -11,15 +11,17 @@ import ija.ija2017.interfaces.PortItemInterface;
  */
 public class PortItem implements PortItemInterface {
 
-    static protected int currentPortItemId = 1;
+    static private int currentPortItemId = 1;
 
-    protected int portItemId;
-    protected int pipeItemId;
-    protected String name;
-    protected int type;
-    protected double value;
+    private int portItemId;
+    private int pipeItemId;
+    private String name;
+    private type type;
+    private double value;
 
-    public PortItem(int type) {
+
+
+    public PortItem(type type) {
         this.type = type;
         this.portItemId = currentPortItemId++; // generate TODO
     }
@@ -32,10 +34,6 @@ public class PortItem implements PortItemInterface {
         return this.value;
     }
 
-    public static int getCurrentPortItemId() {
-        return currentPortItemId;
-    }
-
     public int getPipeItemId() {
         return this.pipeItemId;
     }
@@ -44,11 +42,15 @@ public class PortItem implements PortItemInterface {
         return this.portItemId;
     }
 
-    public int getType() {
+    public type getType() {
         return this.type;
     }
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public void setPipeItemId(int pipeItemId) {
+        this.pipeItemId = pipeItemId;
     }
 }

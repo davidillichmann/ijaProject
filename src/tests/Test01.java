@@ -8,6 +8,7 @@ package tests;
 
 import java.lang.reflect.Modifier;
 
+import ija.ija2017.interfaces.PortItemInterface;
 import ija.ija2017.items.connection.PortItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,12 +20,12 @@ import org.junit.Assert;
  * @author koci
  */
 public class Test01 {
-//
+
     private PortItem port01;
 
     @Before
     public void setUp() {
-        port01 = new PortItem(0);
+        port01 = new PortItem(PortItemInterface.type.input);
     }
 
     /**
@@ -33,8 +34,8 @@ public class Test01 {
     @Test
     public void test01() {
 
-        Assert.assertEquals("Test typu.", 0, port01.getType());
-        Assert.assertNotEquals("Test typu.", 3, port01.getType());
+        Assert.assertEquals("Test typu.", PortItemInterface.type.input, port01.getType());
+        Assert.assertNotEquals("Test typu.", PortItemInterface.type.output, port01.getType());
     }
 
 }
