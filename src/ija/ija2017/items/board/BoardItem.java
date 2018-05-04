@@ -17,9 +17,8 @@ public class BoardItem implements BoardItemInterface {
 
     private ArrayList<BlockItemInterface> blockItems;
 
-    public BoardItem(String name) {
+    public BoardItem() {
         this.blockItems = new ArrayList<>();
-        this.name = name;
     }
 
     @Override
