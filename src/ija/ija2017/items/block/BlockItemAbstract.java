@@ -20,17 +20,17 @@ public abstract class BlockItemAbstract implements BlockItemInterface {
     protected ArrayList<PortItem> inputPorts;
     protected PortItem outputPort;
 
-    @Override
+//    @Override
     public ArrayList<PortItem> getInputPorts() {
         return inputPorts;
     }
 
-    @Override
+//    @Override
     public int getBlockItemId() {
         return blockItemId;
     }
 
-    @Override
+//    @Override
     public PortItem getOutputPort() {
         return outputPort;
     }
@@ -52,7 +52,7 @@ public abstract class BlockItemAbstract implements BlockItemInterface {
         this.outputPort.setValue(value);
     }
 
-    @Override
+//    @Override
     public void setOutputPort(PortItem outputPort) {
         this.outputPort = outputPort;
     }

@@ -9,19 +9,19 @@ public interface BlockItemInterface {
         SUM, SUB, MUL, DIV, CMP
     }
 
-    boolean execute();
-
-    PortItem getOutputPort();
-
-    ArrayList<PortItem> getInputPorts();
-
-    int getBlockItemId();
-
+//    boolean execute();
+//
+//    PortItem getOutputPort();
+//
+//    ArrayList<PortItem> getInputPorts();
+//
+//    int getBlockItemId();
+//
     type getType();
-
-    void setOutputPortValue(double value);
-
-    void setOutputPort(PortItem item);
-
-    void addInputPort(PortItem item);
+//
+//    void setOutputPortValue(double value);
+//
+//    void setOutputPort(PortItem item);
+//
+//    void addInputPort(PortItem item);
 }
