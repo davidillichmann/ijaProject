@@ -5,19 +5,23 @@ import ija.ija2017.drag.DragContainer;
 import ija.ija2017.drag.DraggableNode;
 import ija.ija2017.drag.NodeLink;
 import ija.ija2017.interfaces.BlockItemInterface;
+import ija.ija2017.items.connection.PortItem;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by davidillichmann on 04.05.18.
@@ -32,6 +36,15 @@ public class Root extends AnchorPane {
     AnchorPane right_pane;
     @FXML
     VBox left_pane;
+    @FXML
+    MenuItem new_board;
+    @FXML
+    MenuItem load_board;
+    @FXML
+    MenuItem save_board;
+
+    @FXML
+    ExecuteController controllers;
 
     private EventHandler blockDragOverRoot = null;
     private EventHandler blockDragOverRightPane = null;
@@ -75,10 +88,99 @@ public class Root extends AnchorPane {
             }
 
             addDragDetection(dragBlock);
-            dragBlock.setType(BlockItemInterface.type.values()[i]);
+            dragBlock.setBlockItem(BlockItemInterface.type.values()[i]);
             this.left_pane.getChildren().add(dragBlock);
         }
+        buildBoardHandlers();
         buildDragHandlers();
+    }
+
+    private void buildBoardHandlers() {
+        new_board.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                newBoard();
+            }
+        });
+        save_board.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                saveBoard();
+            }
+        });
+        load_board.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                loadBoard();
+            }
+        });
+    }
+
+    private void loadBoard() {
+        right_pane.getChildren().clear();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File file = fileChooser.showOpenDialog(null);
+
+        try {
+            FileInputStream fileIn = new FileInputStream(file.getPath());
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+
+            ExecuteController savedController = (ExecuteController) in.readObject();
+            controllers = new ExecuteController();
+            right_pane.getChildren().add(controllers);
+            for (DraggableNode nodeItem : savedController.getBoardItem().getDraggableItems()) {
+                DraggableNode newNodeItem = new DraggableNode();
+                newNodeItem.setBlockItem(nodeItem.getBlockItem().getType());
+                newNodeItem.setWholeBlockItem(nodeItem.getBlockItem());
+                this.controllers.getBoardItem().addBlockItem(newNodeItem);
+                right_pane.getChildren().add(newNodeItem);
+                newNodeItem.relocateToPoint(new Point2D(nodeItem.getX() + 109, nodeItem.getY() + 26));
+                newNodeItem.printInputValues();
+            }
+            for(DraggableNode target : controllers.getBoardItem().getDraggableItems()) {
+                for(PortItem portItem : target.getBlockItem().getInputPorts()) {
+                    if(portItem.getInputBlockId() != 0) {
+                        for (DraggableNode source : controllers.getBoardItem().getDraggableItems()) {
+                            if (source.getBlockItem().getBlockItemId() == portItem.getInputBlockId()) {
+                                NodeLink link = new NodeLink();
+                                right_pane.getChildren().add(0, link);
+                                link.bindEndsLoad(source, target);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            c.printStackTrace();
+            return;
+        }
+    }
+
+    private void saveBoard() {
+        FileChooser fileChooser1 = new FileChooser();
+        fileChooser1.setTitle("Save");
+        File file = fileChooser1.showSaveDialog(null);
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(file.getPath());
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(controllers);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in " + file.getPath());
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private void newBoard() {
+        right_pane.getChildren().clear();
+        controllers = new ExecuteController();
+        right_pane.getChildren().add(controllers);
     }
 
     private void buildDragHandlers() {
@@ -133,7 +235,8 @@ public class Root extends AnchorPane {
 
                     DraggableNode node = new DraggableNode();
 
-                    node.setType(DragBlock.type.valueOf(container.getValue("type")));
+                    node.setBlockItem(BlockItemInterface.type.valueOf(container.getValue("type")));
+                    this.controllers.getBoardItem().addBlockItem(node);
                     right_pane.getChildren().add(node);
 
                     Point2D cursorPoint = container.getValue("scene_coords");
@@ -198,13 +301,13 @@ public class Root extends AnchorPane {
 
             DragBlock block = (DragBlock) event.getSource();
 
-            dragOverBlock.setType(block.getType());
+            dragOverBlock.setBlockItem(block.getBlockItem().getType());
             dragOverBlock.relocateToPoint(new Point2D(event.getSceneX(), event.getSceneY()));
 
             ClipboardContent content = new ClipboardContent();
             DragContainer container = new DragContainer();
 
-            container.addData("type", dragOverBlock.getType().toString());
+            container.addData("type", dragOverBlock.getBlockItem().getType().toString());
             content.put(DragContainer.AddNode, container);
 
             dragOverBlock.startDragAndDrop(TransferMode.ANY).setContent(content);

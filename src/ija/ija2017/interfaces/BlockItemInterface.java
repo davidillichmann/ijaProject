@@ -1,17 +1,18 @@
 package ija.ija2017.interfaces;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import ija.ija2017.items.connection.PortItem;
 
-public interface BlockItemInterface {
+public interface BlockItemInterface extends Serializable {
 
     enum type {
-        SUM, SUB, MUL, DIV, CMP
+        SUM, SUB, MUL, DIV, MAX
     }
 
-//    boolean execute();
+    boolean execute();
 //
-//    PortItem getOutputPort();
+    PortItem getOutputPort();
 //
 //    ArrayList<PortItem> getInputPorts();
 //

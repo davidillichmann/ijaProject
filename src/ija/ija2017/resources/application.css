@@ -44,3 +44,8 @@
 .icon-yellow {
 	-fx-background-color: rgb(255, 255, 128);
 }
+
+
+.icon-execute {
+	-fx-background-color: rgb(255, 168, 0);
+}

@@ -4,7 +4,9 @@
 package ija.ija2017.items.block;
 
 import ija.ija2017.interfaces.BlockItemInterface;
+import ija.ija2017.interfaces.PortItemInterface;
 import ija.ija2017.items.connection.PortItem;
+import javafx.event.Event;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,13 @@ public abstract class BlockItemAbstract implements BlockItemInterface {
     protected type type;
     protected ArrayList<PortItem> inputPorts;
     protected PortItem outputPort;
+
+    public void BlockItemAbstract() {
+        this.inputPorts = new ArrayList<PortItem>();
+        for(int i = 0; i < 4; i++) {
+            this.inputPorts.add(i, new PortItem(PortItemInterface.type.input));
+        }
+    }
 
 //    @Override
     public ArrayList<PortItem> getInputPorts() {
@@ -40,12 +49,26 @@ public abstract class BlockItemAbstract implements BlockItemInterface {
         return type;
     }
 
-    public void addInputPort(PortItem portItem) {
-        if (inputPorts == null) {
-            inputPorts = new ArrayList<PortItem>();
-        }
+    public void setInputPortValue(int index, double value) {
+        this.inputPorts.get(index).setValue(value);
+//        if (inputPorts == null) {
+//            inputPorts = new ArrayList<PortItem>();
+//        }
+//        this.inputPorts.add(portItem);
+    }
 
-        this.inputPorts.add(portItem);
+    public void setLink(int inputBlockId) {
+        for (int i = 0; i < 4; i++) {
+            if(this.getInputPorts().get(i).getValue() == 0 || this.getInputPorts().get(i).getValue() == 1) {
+                if(this.getInputPorts().get(i).getInputBlockId() == 0) {
+                    //nasetovani input block id do input portu
+                    this.getInputPorts().get(i).setInputBlockId(inputBlockId);
+                    return;
+                }
+            } else {
+                //vyhodit upozorneni ze mam vsechny porty plne
+            }
+        }
     }
 
     public void setOutputPortValue(double value) {

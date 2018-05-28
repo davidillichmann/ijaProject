@@ -11,11 +11,11 @@ import ija.ija2017.items.connection.PortItem;
  * @author xfryct00
  *
  */
-public class SumBlockItem extends BlockItemAbstract {
+public class MaxBlockItem extends BlockItemAbstract {
 
-    public SumBlockItem() {
+    public MaxBlockItem() {
         super.BlockItemAbstract();
-        this.type = BlockItemInterface.type.SUM;
+        this.type = BlockItemInterface.type.MAX;
         this.blockItemId = currentBlockItemId++;
         this.outputPort = new PortItem(PortItemInterface.type.output);
     }
@@ -25,18 +25,12 @@ public class SumBlockItem extends BlockItemAbstract {
         double result = 0.0;
 
         for (int i = 0; i < getInputPorts().size(); i++){
-            result += getInputPorts().get(i).getValue();
-
-            if (result > Double.MAX_VALUE) {
-                System.out.printf("SUM pretekl\n");
-                //            TODO    event
-            } else if (result < -Double.MAX_VALUE) {
-                System.out.printf("SUM podtekl\n");
+            if(result < getInputPorts().get(i).getValue()) {
+                result = getInputPorts().get(i).getValue();
             }
         }
 
         setOutputPortValue(result);
-        System.out.printf("%f", getOutputPort().getValue());
         return true;
     }
 }

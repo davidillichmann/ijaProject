@@ -14,13 +14,22 @@ public class PortItem implements PortItemInterface {
     static private int currentPortItemId = 1;
     private int portItemId;
     private int pipeItemId;
+    private int inputBlockId = 0;
     private String name;
     private type type;
-    private double value;
+    private double value = 0.0;
 
     public PortItem(type type) {
         this.type = type;
         this.portItemId = currentPortItemId++;
+    }
+
+    public int getInputBlockId() {
+        return inputBlockId;
+    }
+
+    public void setInputBlockId(int inputBlockId) {
+        this.inputBlockId = inputBlockId;
     }
 
     public String getName() {

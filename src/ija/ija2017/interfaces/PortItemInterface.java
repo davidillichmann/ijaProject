@@ -1,6 +1,8 @@
 package ija.ija2017.interfaces;
 
-public interface PortItemInterface {
+import java.io.Serializable;
+
+public interface PortItemInterface extends Serializable {
 
     enum type {
         input, output
@@ -14,5 +16,7 @@ public interface PortItemInterface {
 
     void setValue(double value);
     void setPipeItemId(int id);
+    public void setInputBlockId(int inputBlockId);
+    public int getInputBlockId();
 
 }

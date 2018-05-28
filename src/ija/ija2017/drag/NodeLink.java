@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.CubicCurve;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -18,17 +19,17 @@ import java.util.UUID;
  *
  *
  */
-public class NodeLink extends AnchorPane {
+public class NodeLink extends AnchorPane implements Serializable {
 
-    private final DoubleProperty controlOffsetX = new SimpleDoubleProperty();
-    private final DoubleProperty controlOffsetY = new SimpleDoubleProperty();
-    private final DoubleProperty controlDirectionX1 = new SimpleDoubleProperty();
-    private final DoubleProperty controlDirectionY1 = new SimpleDoubleProperty();
-    private final DoubleProperty controlDirectionX2 = new SimpleDoubleProperty();
-    private final DoubleProperty controlDirectionY2 = new SimpleDoubleProperty();
+    private transient final DoubleProperty controlOffsetX = new SimpleDoubleProperty();
+    private transient final DoubleProperty controlOffsetY = new SimpleDoubleProperty();
+    private transient final DoubleProperty controlDirectionX1 = new SimpleDoubleProperty();
+    private transient final DoubleProperty controlDirectionY1 = new SimpleDoubleProperty();
+    private transient final DoubleProperty controlDirectionX2 = new SimpleDoubleProperty();
+    private transient final DoubleProperty controlDirectionY2 = new SimpleDoubleProperty();
 
     @FXML
-    CubicCurve node_link;
+    transient CubicCurve node_link;
 
     public NodeLink() {
         setId(UUID.randomUUID().toString());
@@ -105,6 +106,25 @@ public class NodeLink extends AnchorPane {
 
         node_link.endYProperty().bind(
                 Bindings.add(target.layoutYProperty(), (target.getWidth() / 2.0)));
+
+        target.getBlockItem().setLink(source.getBlockItem().getBlockItemId());
+
+        source.registerLink(getId());
+        target.registerLink(getId());
+    }
+
+    public void bindEndsLoad(DraggableNode source, DraggableNode target) {
+        node_link.startXProperty().bind(
+                Bindings.add(source.layoutXProperty().add(54), (source.getWidth() / 2.0)));
+
+        node_link.startYProperty().bind(
+                Bindings.add(source.layoutYProperty().add(13), (source.getWidth() / 2.0)));
+
+        node_link.endXProperty().bind(
+                Bindings.add(target.layoutXProperty().add(54), (target.getWidth() / 2.0)));
+
+        node_link.endYProperty().bind(
+                Bindings.add(target.layoutYProperty().add(13), (target.getWidth() / 2.0)));
 
         source.registerLink(getId());
         target.registerLink(getId());

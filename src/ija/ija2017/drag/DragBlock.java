@@ -1,6 +1,7 @@
 package ija.ija2017.drag;
 
 import ija.ija2017.interfaces.BlockItemInterface;
+import ija.ija2017.items.block.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -13,9 +14,9 @@ import java.io.IOException;
  *
  *
  */
-public class DragBlock extends AnchorPane implements BlockItemInterface {
+public class DragBlock extends AnchorPane {
 
-    private type blockType = null;
+    private BlockItemAbstract blockItem;
 
     public DragBlock() {
 
@@ -38,36 +39,41 @@ public class DragBlock extends AnchorPane implements BlockItemInterface {
     private void initialize() {
     }
 
-    public type getType() {
-        return this.blockType;
+    public BlockItemAbstract getBlockItem() {
+        return this.blockItem;
     }
 
-    public void setType(type type) {
+    public void setBlockItem(BlockItemInterface.type type) {
 
-        this.blockType = type;
+//        this.blockType = type;
 
         getStyleClass().clear();
         getStyleClass().add("dragblock");
 
-        switch (this.blockType) {
+        switch (type) {
 
             case SUM:
                 getStyleClass().add("icon-blue");
+                this.blockItem = new SumBlockItem();
                 break;
 
             case SUB:
                 getStyleClass().add("icon-red");
+                this.blockItem = new SubBlockItem();
                 break;
 
             case MUL:
                 getStyleClass().add("icon-green");
+                this.blockItem = new MulBlockItem();
                 break;
 
             case DIV:
                 getStyleClass().add("icon-yellow");
+                this.blockItem = new DivBlockItem();
                 break;
-            case CMP:
+            case MAX:
                 getStyleClass().add("icon-grey");
+                this.blockItem = new MaxBlockItem();
                 break;
             default:
                 break;

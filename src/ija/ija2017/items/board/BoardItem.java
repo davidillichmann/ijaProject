@@ -3,6 +3,7 @@
  */
 package ija.ija2017.items.board;
 
+import ija.ija2017.drag.DraggableNode;
 import ija.ija2017.interfaces.BlockItemInterface;
 import ija.ija2017.interfaces.BoardItemInterface;
 
@@ -15,25 +16,25 @@ public class BoardItem implements BoardItemInterface {
 
     private String name;
 
-    private ArrayList<BlockItemInterface> blockItems;
+    private ArrayList<DraggableNode> draggableItems;
 
     public BoardItem() {
-        this.blockItems = new ArrayList<>();
+        this.draggableItems = new ArrayList<>();
     }
 
-    @Override
-    public ArrayList<BlockItemInterface> getBlockItems() {
-        return this.blockItems;
+//    @Override
+    public ArrayList<DraggableNode> getDraggableItems() {
+        return this.draggableItems;
     }
 
-    @Override
-    public boolean deleteBlockItem(BlockItemInterface blockItem) {
-        return this.blockItems.remove(blockItem);
+//    @Override
+    public boolean deleteBlockItem(DraggableNode draggableItem) {
+        return this.draggableItems.remove(draggableItem);
     }
 
-    @Override
-    public boolean addBlockItem(BlockItemInterface blockItem) {
-        return this.blockItems.add(blockItem);
+//    @Override
+    public boolean addBlockItem(DraggableNode draggableItem) {
+        return this.draggableItems.add(draggableItem);
     }
 
 

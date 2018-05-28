@@ -1,14 +1,17 @@
 package ija.ija2017.interfaces;
 
+import ija.ija2017.drag.DraggableNode;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface BoardItemInterface {
+public interface BoardItemInterface extends Serializable {
 
-    ArrayList<BlockItemInterface> getBlockItems();
+    public ArrayList<DraggableNode> getDraggableItems();
 
-    boolean deleteBlockItem(BlockItemInterface blockItem);
+//    boolean deleteBlockItem(BlockItemInterface blockItem);
 
-    boolean addBlockItem(BlockItemInterface blockItem);
+    public boolean addBlockItem(DraggableNode draggableItem);
 
     boolean saveItem();
 

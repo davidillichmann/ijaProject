@@ -1,8 +1,8 @@
 package ija.ija2017.interfaces;
 
-public interface ExecuteControllerInterface {
+import java.io.Serializable;
 
-    void init();
+public interface ExecuteControllerInterface extends Serializable {
 
     void setBoardName(String name);
 
